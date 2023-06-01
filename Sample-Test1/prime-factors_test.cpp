@@ -1,14 +1,19 @@
 #include "pch.h"
 #include "../Project3/prime-factors.cpp"
 
-TEST(PrimeFactorTest, Of1)
+class PrimeFactorTest : public testing::Test
 {
+public:
 	PrimeFactor prime_factor;
 	vector<int> expected = {};
+};
+
+TEST_F(PrimeFactorTest, Of1)
+{
 	EXPECT_EQ(expected, prime_factor.of(1));
 }
 
-TEST(PrimeFactorTest, Of2)
+TEST_F(PrimeFactorTest, Of2)
 {
 	PrimeFactor prime_factor;
 	vector<int> expected = {2};
