@@ -15,7 +15,12 @@ TEST_F(PrimeFactorTest, Of1)
 
 TEST_F(PrimeFactorTest, Of2)
 {
-	PrimeFactor prime_factor;
-	vector<int> expected = {2};
+	 expected = {2};
 	EXPECT_EQ(expected, prime_factor.of(2));
+}
+
+TEST_F(PrimeFactorTest, Of3)
+{
+	 expected = {3};
+	EXPECT_EQ(expected, prime_factor.of(3));
 }
