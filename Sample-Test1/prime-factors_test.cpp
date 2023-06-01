@@ -42,3 +42,9 @@ TEST_F(PrimeFactorTest, Of9)
 	expected = {3, 3};
 	EXPECT_EQ(expected, prime_factor.of(9));
 }
+
+TEST_F(PrimeFactorTest, Of12)
+{
+	expected = {2, 2, 3};
+	EXPECT_EQ(expected, prime_factor.of(12));
+}
