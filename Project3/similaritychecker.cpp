@@ -31,32 +31,40 @@ public:
 		}
 	}
 
-	void checkAlpha(const string& a, const std::string& b)
+	void makeSetAandB(const string& a, const std::string& b, set<char>& sa, set<char>& sb)
 	{
-		const int MAX = 40;
-		int sameCnt = 0;
-		int totalCnt = 0;
-
-		set<char> sa;
 		for (const auto& ch : a)
 		{
 			sa.insert(ch);
 		}
 
-		set<char> sb;
 		for (const auto& ch : b)
 		{
 			sb.insert(ch);
 		}
+	}
 
+	int getSameCnt(set<char> sa, set<char> sb)
+	{
+		int sameCnt = 0;
 		for (const auto& ch_b : sa)
 		{
 			auto it = sb.find(ch_b);
 			if (it != sb.end()) sameCnt++;
 		}
-		totalCnt = sa.size() + sb.size() - sameCnt;
+		return sameCnt;
+	}
 
-		result = sameCnt * MAX / totalCnt;
+	void checkAlpha(const string& a, const std::string& b)
+	{
+		const int MAX = 40;
+
+		set<char> sa;
+		set<char> sb;
+		makeSetAandB(a, b, sa, sb);
+		int sameCnt = getSameCnt(sa, sb);
+
+		result = sameCnt * MAX / (sa.size() + sb.size() - sameCnt);
 	}
 
 	int getResult()
