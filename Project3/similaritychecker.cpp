@@ -1,4 +1,5 @@
 #include <string>
+#include <stdexcept>
 #include <set>
 using namespace std;
 
@@ -55,9 +56,35 @@ public:
 		return sameCnt;
 	}
 
+	bool isSmallLetter(const string& a, const string& b)
+	{
+		for (auto const& ch : a)
+		{
+			if (ch >= 'A' && ch <= 'Z') continue;
+			return true;
+		}
+
+		for (auto const& ch : b)
+		{
+			if (ch >= 'A' && ch <= 'Z') continue;
+			return true;
+		}
+		return false;
+	}
+
+	void assertSmallLetter(const string& a, const std::string& b)
+	{
+		if (isSmallLetter(a, b))
+		{
+			throw std::invalid_argument("소문자 포함됨");
+		}
+	}
+
 	void checkAlpha(const string& a, const std::string& b)
 	{
 		const int MAX = 40;
+
+		assertSmallLetter(a, b);
 
 		set<char> sa;
 		set<char> sb;

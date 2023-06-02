@@ -117,3 +117,11 @@ TEST(SimilarityCheckerTest, CheckAlphaDifferent)
 	s.checkAlpha(A, B);
 	EXPECT_EQ(s.getResult(), 20);
 }
+
+TEST(SimilarityCheckerTest, CheckAlphaSmallLetter)
+{
+	SimilarityChecker s;
+	string A = "AA";
+	string B = "aa";
+	EXPECT_THROW(s.checkAlpha(A, B), std::invalid_argument);
+}
