@@ -13,6 +13,11 @@ public:
 
 		if (bigger >= smaller * 2) result = 0;
 		else if (a == b || a.length() == b.length()) result = 60;
+		else
+		{
+			int gap = bigger - smaller;
+			result = 60 - (gap * 60 / smaller);
+		}
 	}
 
 	int getResult()
