@@ -34,11 +34,19 @@ public:
 	void checkAlpha(const string& a, const std::string& b)
 	{
 		const int MAX = 40;
-		size_t bigger = a.length();
-		size_t smaller = b.length();
-
+		string bigger = a;
+		string smaller = b;
+		int sameCnt = 0;
+		int totalCnt = smaller.length();
 		if (bigger < smaller) swap(bigger, smaller);
-		result = 40;
+		for (const auto& smaller_ch : smaller)
+		{
+			for (const auto& bigger_ch : bigger)
+			{
+				if (smaller_ch == bigger_ch) sameCnt++;
+			}
+		}
+		result = sameCnt * 40 / totalCnt;
 	}
 
 	int getResult()
