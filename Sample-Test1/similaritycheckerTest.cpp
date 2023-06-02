@@ -7,7 +7,7 @@ TEST(SimilarityCheckerTest, CheckEmpty)
 	string A = "";
 	string B = "";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 0);
+	EXPECT_EQ(s.getLengthResult(), 0);
 }
 
 TEST(SimilarityCheckerTest, CheckSame)
@@ -16,7 +16,7 @@ TEST(SimilarityCheckerTest, CheckSame)
 	string A = "ABC";
 	string B = "ABC";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 60);
+	EXPECT_EQ(s.getLengthResult(), 60);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthSame)
@@ -25,7 +25,7 @@ TEST(SimilarityCheckerTest, CheckLengthSame)
 	string A = "ABC";
 	string B = "DEF";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 60);
+	EXPECT_EQ(s.getLengthResult(), 60);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthZeroPoint)
@@ -34,7 +34,7 @@ TEST(SimilarityCheckerTest, CheckLengthZeroPoint)
 	string A = "A";
 	string B = "BB";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 0);
+	EXPECT_EQ(s.getLengthResult(), 0);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthZeroPoint2)
@@ -43,7 +43,7 @@ TEST(SimilarityCheckerTest, CheckLengthZeroPoint2)
 	string A = "AA";
 	string B = "BBBB";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 0);
+	EXPECT_EQ(s.getLengthResult(), 0);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthZeroPoint3)
@@ -52,7 +52,7 @@ TEST(SimilarityCheckerTest, CheckLengthZeroPoint3)
 	string A = "BBBB";
 	string B = "AA";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 0);
+	EXPECT_EQ(s.getLengthResult(), 0);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthDifferent)
@@ -61,7 +61,7 @@ TEST(SimilarityCheckerTest, CheckLengthDifferent)
 	string A = "AAABB";
 	string B = "BAA";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 20);
+	EXPECT_EQ(s.getLengthResult(), 20);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthDifferent2)
@@ -70,7 +70,7 @@ TEST(SimilarityCheckerTest, CheckLengthDifferent2)
 	string A = "AA";
 	string B = "AAA";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 30);
+	EXPECT_EQ(s.getLengthResult(), 30);
 }
 
 TEST(SimilarityCheckerTest, CheckLengthDifferentLong)
@@ -79,5 +79,58 @@ TEST(SimilarityCheckerTest, CheckLengthDifferentLong)
 	string A = "AAAAA";
 	string B = "AAAAAAAAA";
 	s.checkLength(A, B);
-	EXPECT_EQ(s.getResult(), 12);
+	EXPECT_EQ(s.getLengthResult(), 12);
+}
+
+TEST(SimilarityCheckerTest, CheckAlpha)
+{
+	SimilarityChecker s;
+	string A = "ASD";
+	string B = "DSA";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getAlphaResult(), 40);
+}
+
+TEST(SimilarityCheckerTest, CheckAlphaZero)
+{
+	SimilarityChecker s;
+	string A = "A";
+	string B = "BB";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getAlphaResult(), 0);
+}
+
+TEST(SimilarityCheckerTest, CheckAlphaMax)
+{
+	SimilarityChecker s;
+	string A = "AAABB";
+	string B = "BA";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getAlphaResult(), 40);
+}
+
+TEST(SimilarityCheckerTest, CheckAlphaDifferent)
+{
+	SimilarityChecker s;
+	string A = "AA";
+	string B = "AAE";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getAlphaResult(), 20);
+}
+
+TEST(SimilarityCheckerTest, CheckAlphaSmallLetter)
+{
+	SimilarityChecker s;
+	string A = "AA";
+	string B = "aa";
+	EXPECT_THROW(s.checkAlpha(A, B), std::invalid_argument);
+}
+
+TEST(SimilarityCheckerTest, CheckAll)
+{
+	SimilarityChecker s;
+	string A = "ABCDE";
+	string B = "ABCDE";
+	s.checkAll(A, B);
+	EXPECT_EQ(s.getResult(), 100);
 }
