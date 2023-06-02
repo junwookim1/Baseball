@@ -125,3 +125,12 @@ TEST(SimilarityCheckerTest, CheckAlphaSmallLetter)
 	string B = "aa";
 	EXPECT_THROW(s.checkAlpha(A, B), std::invalid_argument);
 }
+
+TEST(SimilarityCheckerTest, CheckAll)
+{
+	SimilarityChecker s;
+	string A = "ABCDE";
+	string B = "ABCDE";
+	s.checkAll(A, B);
+	EXPECT_EQ(s.getResult(), 100);
+}

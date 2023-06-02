@@ -94,6 +94,12 @@ public:
 		alpha_result = sameCnt * MAX / (sa.size() + sb.size() - sameCnt);
 	}
 
+	void checkAll(const string& a, const std::string& b)
+	{
+		checkLength(a, b);
+		checkAlpha(a, b);
+	}
+
 	int getLengthResult()
 	{
 		return length_result;
