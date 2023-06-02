@@ -1,6 +1,14 @@
 #include "pch.h"
 #include "../Project3/similaritychecker.cpp"
 
+TEST(SimilarityCheckerTest, CheckEmpty)
+{
+	SimilarityChecker s;
+	string A = "";
+	string B = "";
+	s.checkLength(A, B);
+	EXPECT_EQ(s.getResult(), 0);
+}
 
 TEST(SimilarityCheckerTest, CheckSame)
 {

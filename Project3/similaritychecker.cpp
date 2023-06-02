@@ -5,18 +5,29 @@ using namespace std;
 class SimilarityChecker
 {
 public:
+	bool checkZero(size_t bigger, size_t smaller)
+	{
+		return bigger == 0 || smaller == 0 || bigger >= smaller * 2;
+	}
+
+	bool checkMax(size_t bigger, size_t smaller)
+	{
+		return bigger == smaller;
+	}
+
 	void checkLength(const string& a, const std::string& b)
 	{
+		const int MAX = 60;
 		size_t bigger = a.length();
 		size_t smaller = b.length();
+
 		if (bigger < smaller) swap(bigger, smaller);
 
-		if (bigger >= smaller * 2) result = 0;
-		else if (a == b || a.length() == b.length()) result = 60;
+		if (checkZero(bigger, smaller)) result = 0;
+		else if (checkMax(bigger, smaller)) result = MAX;
 		else
 		{
-			int gap = bigger - smaller;
-			result = 60 - (gap * 60 / smaller);
+			result = MAX - ((bigger - smaller) * MAX / smaller);
 		}
 	}
 
