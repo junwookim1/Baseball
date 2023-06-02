@@ -24,11 +24,11 @@ public:
 
 		if (bigger < smaller) swap(bigger, smaller);
 
-		if (checkZero(bigger, smaller)) result = 0;
-		else if (checkMax(bigger, smaller)) result = MAX;
+		if (checkZero(bigger, smaller)) length_result = 0;
+		else if (checkMax(bigger, smaller)) length_result = MAX;
 		else
 		{
-			result = MAX - ((bigger - smaller) * MAX / smaller);
+			length_result = MAX - ((bigger - smaller) * MAX / smaller);
 		}
 	}
 
@@ -91,14 +91,25 @@ public:
 		makeSetAandB(a, b, sa, sb);
 		int sameCnt = getSameCnt(sa, sb);
 
-		result = sameCnt * MAX / (sa.size() + sb.size() - sameCnt);
+		alpha_result = sameCnt * MAX / (sa.size() + sb.size() - sameCnt);
+	}
+
+	int getLengthResult()
+	{
+		return length_result;
+	}
+
+	int getAlphaResult()
+	{
+		return alpha_result;
 	}
 
 	int getResult()
 	{
-		return result;
+		return getLengthResult() + getAlphaResult();
 	}
 
 private:
-	int result = 0;
+	int length_result = 0;
+	int alpha_result = 0;
 };
