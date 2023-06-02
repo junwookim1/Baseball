@@ -1,11 +1,13 @@
 #include <string>
 #include <stdexcept>
 #include <set>
+
 using namespace std;
 
 class SimilarityChecker
 {
 public:
+
 	int checkLength(const string& a, const std::string& b)
 	{
 		const int MAX = 60;
@@ -16,8 +18,9 @@ public:
 
 		if (checkZero(bigger, smaller)) return length_result = 0;
 		if (checkMax(bigger, smaller)) return length_result = MAX;
-		return length_result = MAX - ((bigger - smaller) * MAX / smaller);
+		return calculateLengthResult(MAX, bigger, smaller);
 	}
+
 
 	int checkAlpha(const string& a, const std::string& b)
 	{
@@ -28,9 +31,11 @@ public:
 		set<char> sa;
 		set<char> sb;
 		makeSetAandB(a, b, sa, sb);
-		int sameCnt = getSameCnt(sa, sb);
 
-		return alpha_result = sameCnt * MAX / (sa.size() + sb.size() - sameCnt);
+		int sameCnt = getSameCnt(sa, sb);
+		int totalCnt = getTotalCnt(sa, sb, sameCnt);
+
+		return calculateAlphaResult(MAX, totalCnt, sameCnt);
 	}
 
 	void checkAll(const string& a, const std::string& b)
@@ -92,6 +97,11 @@ private:
 		return sameCnt;
 	}
 
+	int getTotalCnt(set<char> sa, set<char> sb, int sameCnt)
+	{
+		return sa.size() + sb.size() - sameCnt;
+	}
+
 	bool isSmallLetter(const string& a, const string& b)
 	{
 		for (auto const& ch : a)
@@ -114,5 +124,14 @@ private:
 		{
 			throw std::invalid_argument("�ҹ��� ���Ե�");
 		}
+	}
+	int calculateLengthResult(const int MAX, size_t bigger, size_t smaller)
+	{
+		return length_result = MAX - ((bigger - smaller) * MAX / smaller);
+	}
+
+	int calculateAlphaResult(const int MAX, int totalCnt, int sameCnt)
+	{
+		return alpha_result = sameCnt * MAX / totalCnt;
 	}
 };
