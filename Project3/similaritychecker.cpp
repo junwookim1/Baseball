@@ -7,25 +7,24 @@ using namespace std;
 class SimilarityChecker
 {
 public:
+	const int MAX_LENGTH_RESULT = 60;
+	const int MAX_ALPHA_RESULT = 40;
 
 	int checkLength(const string& a, const std::string& b)
 	{
-		const int MAX = 60;
 		size_t bigger = a.length();
 		size_t smaller = b.length();
 
 		if (bigger < smaller) swap(bigger, smaller);
 
 		if (checkZero(bigger, smaller)) return length_result = 0;
-		if (checkMax(bigger, smaller)) return length_result = MAX;
-		return calculateLengthResult(MAX, bigger, smaller);
+		if (checkMax(bigger, smaller)) return length_result = MAX_LENGTH_RESULT;
+		return calculateLengthResult(MAX_LENGTH_RESULT, bigger, smaller);
 	}
 
 
 	int checkAlpha(const string& a, const std::string& b)
 	{
-		const int MAX = 40;
-
 		assertSmallLetter(a, b);
 
 		set<char> sa;
@@ -35,7 +34,7 @@ public:
 		int sameCnt = getSameCnt(sa, sb);
 		int totalCnt = getTotalCnt(sa, sb, sameCnt);
 
-		return calculateAlphaResult(MAX, totalCnt, sameCnt);
+		return calculateAlphaResult(MAX_ALPHA_RESULT, totalCnt, sameCnt);
 	}
 
 	void checkAll(const string& a, const std::string& b)
@@ -125,6 +124,7 @@ private:
 			throw std::invalid_argument("�ҹ��� ���Ե�");
 		}
 	}
+
 	int calculateLengthResult(const int MAX, size_t bigger, size_t smaller)
 	{
 		return length_result = MAX - ((bigger - smaller) * MAX / smaller);
