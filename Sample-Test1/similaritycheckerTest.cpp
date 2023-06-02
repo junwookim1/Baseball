@@ -55,3 +55,21 @@ TEST(SimilarityCheckerTest, CheckLengthDifferent)
 	s.checkLength(A, B);
 	EXPECT_EQ(s.getResult(), 20);
 }
+
+TEST(SimilarityCheckerTest, CheckLengthDifferent2)
+{
+	SimilarityChecker s;
+	string A = "AA";
+	string B = "AAA";
+	s.checkLength(A, B);
+	EXPECT_EQ(s.getResult(), 30);
+}
+
+TEST(SimilarityCheckerTest, CheckLengthDifferentLong)
+{
+	SimilarityChecker s;
+	string A = "AAAAA";
+	string B = "AAAAAAAAA";
+	s.checkLength(A, B);
+	EXPECT_EQ(s.getResult(), 12);
+}
