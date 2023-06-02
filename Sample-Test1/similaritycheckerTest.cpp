@@ -81,3 +81,12 @@ TEST(SimilarityCheckerTest, CheckLengthDifferentLong)
 	s.checkLength(A, B);
 	EXPECT_EQ(s.getResult(), 12);
 }
+
+TEST(SimilarityCheckerTest, CheckAlpha)
+{
+	SimilarityChecker s;
+	string A = "ASD";
+	string B = "DSA";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getResult(), 40);
+}
