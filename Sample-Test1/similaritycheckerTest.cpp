@@ -90,3 +90,30 @@ TEST(SimilarityCheckerTest, CheckAlpha)
 	s.checkAlpha(A, B);
 	EXPECT_EQ(s.getResult(), 40);
 }
+
+TEST(SimilarityCheckerTest, CheckAlphaZero)
+{
+	SimilarityChecker s;
+	string A = "A";
+	string B = "BB";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getResult(), 0);
+}
+
+TEST(SimilarityCheckerTest, CheckAlphaMax)
+{
+	SimilarityChecker s;
+	string A = "AAABB";
+	string B = "BA";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getResult(), 40);
+}
+
+TEST(SimilarityCheckerTest, CheckAlphaDifferent)
+{
+	SimilarityChecker s;
+	string A = "AA";
+	string B = "AAE";
+	s.checkAlpha(A, B);
+	EXPECT_EQ(s.getResult(), 20);
+}

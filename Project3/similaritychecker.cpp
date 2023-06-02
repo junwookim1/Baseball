@@ -1,5 +1,5 @@
 #include <string>
-
+#include <set>
 using namespace std;
 
 class SimilarityChecker
@@ -34,19 +34,29 @@ public:
 	void checkAlpha(const string& a, const std::string& b)
 	{
 		const int MAX = 40;
-		string bigger = a;
-		string smaller = b;
 		int sameCnt = 0;
-		int totalCnt = smaller.length();
-		if (bigger < smaller) swap(bigger, smaller);
-		for (const auto& smaller_ch : smaller)
+		int totalCnt = 0;
+
+		set<char> sa;
+		for (const auto& ch : a)
 		{
-			for (const auto& bigger_ch : bigger)
-			{
-				if (smaller_ch == bigger_ch) sameCnt++;
-			}
+			sa.insert(ch);
 		}
-		result = sameCnt * 40 / totalCnt;
+
+		set<char> sb;
+		for (const auto& ch : b)
+		{
+			sb.insert(ch);
+		}
+
+		for (const auto& ch_b : sa)
+		{
+			auto it = sb.find(ch_b);
+			if (it != sb.end()) sameCnt++;
+		}
+		totalCnt = sa.size() + sb.size() - sameCnt;
+
+		result = sameCnt * MAX / totalCnt;
 	}
 
 	int getResult()
