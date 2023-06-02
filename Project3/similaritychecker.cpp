@@ -7,7 +7,7 @@ class SimilarityChecker
 public:
 	void checkLength(const string& a, const std::string& b)
 	{
-		if (a == b) result = 60;
+		if (a == b || a.length() == b.length()) result = 60;
 	}
 
 	int getResult()
