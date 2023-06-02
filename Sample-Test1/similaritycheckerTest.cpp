@@ -2,8 +2,11 @@
 #include "../Project3/similaritychecker.cpp"
 
 
-TEST(SimilarityCheckerTest, Basic)
+TEST(SimilarityCheckerTest, CheckLengthSame)
 {
 	SimilarityChecker s;
-	EXPECT_EQ(1, 1);
+	string A = "ABC";
+	string B = "ABC";
+	s.checkLength(A, B);
+	EXPECT_EQ(s.getResult(), 60);
 }
