@@ -15,7 +15,7 @@ public:
 		return bigger == smaller;
 	}
 
-	void checkLength(const string& a, const std::string& b)
+	int checkLength(const string& a, const std::string& b)
 	{
 		const int MAX = 60;
 		size_t bigger = a.length();
@@ -23,12 +23,9 @@ public:
 
 		if (bigger < smaller) swap(bigger, smaller);
 
-		if (checkZero(bigger, smaller)) result = 0;
-		else if (checkMax(bigger, smaller)) result = MAX;
-		else
-		{
-			result = MAX - ((bigger - smaller) * MAX / smaller);
-		}
+		if (checkZero(bigger, smaller)) return result = 0;
+		if (checkMax(bigger, smaller)) return result = MAX;
+		return result = MAX - ((bigger - smaller) * MAX / smaller);
 	}
 
 	int getResult()
